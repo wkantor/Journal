@@ -49,22 +49,29 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 # zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
-frames = ['f1', 'f2', 'f3', 'f4', 'f5']
-
 
 class Strona:
-    def __init__(self, frame):
-        self.frame = frame
-        self.frame.grid(row=0, column=0, sticky='news')
+    def __init__(self):
+        self.frame = Frame(root, background='black',)
+
+    def frame(self):
+        return self.frame.grid(row=0, column=0, sticky='news')
 
 
-f = Strona(Frame(root, background='black',))
+class Napis:
+    def napis(self, frame, txt):
+        self.napis = Label(frame, text=txt, font=(
+            "arial", 30, "bold"), fg='white', bg='black')
+        return self.napis.place(relx=0.1, rely=0.1, anchor=CENTER)
 
 
-f1 = f.frame
-Napis4 = Label(f1, text="Contemplation",
-               font=("arial", 30, "bold"), fg='white', bg='black')
-Napis4.place(relx=0.5, rely=0.1, anchor=CENTER)
+S1 = Strona()
+F1 = S1.frame
+F2 = S1.frame
 
-raise_frame(f1)
+N1 = Napis()
+Gn1 = N1.napis(F1, "Witej")
+
+
+raise_frame(F1)
 root.mainloop()
