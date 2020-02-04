@@ -53,13 +53,15 @@ frames = ['f1', 'f2', 'f3', 'f4', 'f5']
 
 
 def generuj():
-    for x in frames:
-        x = Frame(root, background='black',)
-        x.grid(row=0, column=0, sticky='news')
+    x = Frame(root, background='black',)
+    x.grid(row=0, column=0, sticky='news')
+    return x
 
 
-generuj()
-
+f1 = generuj()
+Napis4 = Label(f1, text="Contemplation",
+               font=("arial", 30, "bold"), fg='white', bg='black')
+Napis4.place(relx=0.5, rely=0.1, anchor=CENTER)
 
 raise_frame(f1)
 root.mainloop()
