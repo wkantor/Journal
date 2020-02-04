@@ -49,19 +49,33 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 # zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
-frames = ['f1', 'f2', 'f3', 'f4', 'f5']
 
-
-def generuj():
+def generuj_strone():
     x = Frame(root, background='black',)
     x.grid(row=0, column=0, sticky='news')
     return x
 
 
-f1 = generuj()
-Napis4 = Label(f1, text="Contemplation",
-               font=("arial", 30, "bold"), fg='white', bg='black')
-Napis4.place(relx=0.5, rely=0.1, anchor=CENTER)
+def generuj_gnapis(frame, text):
+    x = Label(frame, text=text, font=(
+        "arial", 30, "bold"), fg='white', bg='black')
+    x.place(relx=0.5, rely=0.1, anchor=CENTER)
+    return x
+
+
+def generuj_button(frame, text, command, relx, rely, anchor):
+    x = Button(frame, text=text,
+               command=lambda: command)
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
+
+
+f1 = generuj_strone()
+f2 = generuj_strone()
+n1 = generuj_gnapis(f1, "welcome")
+n2 = generuj_gnapis(f2, "f2")
+b1 = generuj_button(f1, "f2", raise_frame(f2), 0.1, 0.1, CENTER)
+
 
 raise_frame(f1)
 root.mainloop()
