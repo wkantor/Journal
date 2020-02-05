@@ -4,7 +4,6 @@ Created on 4 Feb 2020
 @author: VojtechK
 '''
 
-
 from datetime import datetime
 from tkinter import *
 from tkinter.filedialog import *
@@ -50,135 +49,109 @@ root.columnconfigure(0, weight=1)
 root.rowconfigure(0, weight=1)
 # zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
-frame1 = Frame(root, background='black',)
 
-frame2 = Frame(root, background='black',)
-
-frame3 = Frame(root, background='black',)
-
-frame4 = Frame(root, background='black',)
-# FRAMY
-
-for frame in (frame1, frame2, frame3, frame4):
-    # frame.place(x=0, y=0, relwidth=1, relheight=1)
-    frame.grid(row=0, column=0, sticky='news')
-# ulozyni framow
+def generuj_strone():
+    x = Frame(root, background='black',)
+    x.grid(row=0, column=0, sticky='news')
+    return x
 
 
-###
-###
-###
+def generuj_gnapis(frame, text):
+    x = Label(frame, text=text, font=(
+        "arial", 30, "bold"), fg='white', bg='black')
+    x.place(relx=0.5, rely=0.1, anchor=CENTER)
+    return x
 
 
-Napis1 = Label(frame1, text="Welcome to the Journal!",
-               font=("arial", 30, "bold"), fg='white', bg='black')
-Napis1.place(relx=0.5, rely=0.1, anchor=CENTER)
-
-Button11 = Button(frame1, text="Free writing",
-                  command=lambda: raise_frame(frame2))
-Button11.place(relx=0.1, rely=0.2, anchor=CENTER, )
-
-Button12 = Button(frame1, text="The Work",
-                  command=lambda: raise_frame(frame3))
-Button12.place(relx=0.1, rely=0.3, anchor=CENTER, )
-
-Button13 = Button(frame1, text="Contemplation",
-                  command=lambda: raise_frame(frame4))
-Button13.place(relx=0.1, rely=0.4, anchor=CENTER, )
-
-Button1quit = Button(frame1, text="Exit", command=lambda: quit())
-Button1quit.place(relx=0.95, rely=0.95, anchor=CENTER)
+def generuj_napis(frame, text, relx, rely, anchor):
+    x = Label(frame, text=text, fg='white', bg='black')
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
 
 
-###
-###
-###
+def generuj_button_cf(frame, text, f, relx, rely, anchor):
+    x = Button(frame, text=text, command=lambda: raise_frame(f))
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
 
 
-Napis2 = Label(frame2, text="Free writing.",
-               font=("arial", 30, "bold"), fg='white', bg='black')
-Napis2.place(relx=0.5, rely=0.1, anchor=CENTER)
-
-Text2 = Text(frame2, height=40, width=100, setgrid=True)
-Text2.place(relx=0.5, rely=0.5, anchor=CENTER)   # centers it
-Text2.insert(END, datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n\n")
-
-Button2 = Button(frame2, text="Main page", command=lambda: raise_frame(frame1))
-Button2.place(relx=0.95, rely=0.95, anchor=CENTER)
-
-Button2save = Button(frame2, text='Save', command=lambda: saveFile(Text2))
-Button2save.place(relx=0.90, rely=0.95, anchor=CENTER, )
+def generuj_button_s(frame, text, t, relx, rely, anchor):
+    x = Button(frame, text=text, command=lambda: saveFile(t))
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
 
 
-###
-###
-###
+def generuj_button_s_a(frame, text, a1, a2, a3, a4, a5, a6, relx, rely, anchor):
+    x = Button(frame, text=text, command=lambda: combine(
+        a1, a2, a3, a4, a5, a6))
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
 
 
-Napis3 = Label(frame3, text="The Work",
-               font=("arial", 30, "bold"), fg='white', bg='black')
-Napis3.place(relx=0.5, rely=0.1, anchor=CENTER)
+def generuj_button_q(frame, text, relx, rely, anchor):
+    x = Button(frame, text=text, command=lambda: quit())
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    return x
 
-Napis31 = Label(frame3, text="Statement", fg='white', bg='black')
-Napis31.place(relx=0.1, rely=0.2, anchor=SW)
 
-Text31 = Text(frame3, height=6, width=70)
-Text31.place(relx=0.1, rely=0.2, anchor=NW)
-Text31.insert(END, ">")
+def generuj_text(frame, height, width, relx, rely, anchor, insert):
+    x = Text(frame, height=height, width=width)
+    x.place(relx=relx, rely=rely, anchor=anchor)
+    x.insert(END, insert)
+    return x
+# funkcje, kiere generujom potrzebne widgety
 
-Napis32 = Label(frame3, text="Is it true?", fg='white', bg='black')
-Napis32.place(relx=0.1, rely=0.35, anchor=SW)
 
-Text32 = Text(frame3, height=1, width=10)
-Text32.place(relx=0.1, rely=0.35, anchor=NW)
-Text32.insert(END, ">")
+f1 = generuj_strone()
+f2 = generuj_strone()
+f3 = generuj_strone()
+f4 = generuj_strone()
+f5 = generuj_strone()
+# Okna
 
-Napis33 = Label(frame3, text="Can you absolutely know that it is true?",
-                fg='white', bg='black')
-Napis33.place(relx=0.1, rely=0.43, anchor=SW)
+n1 = generuj_gnapis(f1, "Welcome to the Journal!")
+b11 = generuj_button_cf(f1, "Free writing", f2, 0.1, 0.2, CENTER)
+b12 = generuj_button_cf(f1, "The Work", f3, 0.1, 0.3, CENTER)
+b13 = generuj_button_cf(f1, "Contemplation", f4, 0.1, 0.4, CENTER)
+b1q = generuj_button_q(f1, "Exit", 0.95, 0.95, CENTER)
+# f1
 
-Text33 = Text(frame3, height=1, width=10)
-Text33.place(relx=0.1, rely=0.43, anchor=NW)
-Text33.insert(END, ">")
+n2 = generuj_gnapis(f2, "Free writing.")
+t2 = generuj_text(f2, 40, 100, 0.5, 0.5, CENTER,
+                  datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n\n")
+b2 = generuj_button_cf(f2, "Main page", f1, 0.95, 0.95, CENTER)
+b2s = generuj_button_s(f2, "Save", t2, 0.9, 0.95, CENTER)
+# f2
 
-Napis34 = Label(frame3, text="How do you react, what happens, \
-when you believe that thought?",
-                fg='white', bg='black')
-Napis34.place(relx=0.1, rely=0.51, anchor=SW)
+n3 = generuj_gnapis(f3, "The Work.")
 
-Text34 = Text(frame3, height=10, width=70)
-Text34.place(relx=0.1, rely=0.51, anchor=NW)
-Text34.insert(END, ">")
+n31 = generuj_napis(f3, "Statement.", 0.1, 0.2, SW)
+n32 = generuj_napis(f3, "Is it true?", 0.1, 0.35, SW)
+n33 = generuj_napis(
+    f3, "Can you absolutely know that it is true?", 0.1, 0.43, SW)
+n34 = generuj_napis(f3, "How do you react, what happens, \
+when you believe that thought?", 0.1, 0.51, SW)
+n35 = generuj_napis(
+    f3, "Who would you be without that thought?", 0.1, 0.76, SW)
+n36 = generuj_napis(f3, "Turnaround.", 0.6, 0.2, SW)
 
-Napis35 = Label(frame3, text="Who would you be without that thought?",
-                fg='white', bg='black')
-Napis35.place(relx=0.1, rely=0.76, anchor=SW)
+t31 = generuj_text(f3, 6, 70, 0.1, 0.2, NW, ">")
+t32 = generuj_text(f3, 1, 10, 0.1, 0.35, NW, ">")
+t33 = generuj_text(f3, 1, 10, 0.1, 0.43, NW, ">")
+t34 = generuj_text(f3, 10, 70, 0.1, 0.51, NW, ">")
+t35 = generuj_text(f3, 11, 70, 0.1, 0.76, NW, ">")
+t36 = generuj_text(f3, 41, 50, 0.6, 0.2, NW, ">")
 
-Text35 = Text(frame3, height=11, width=70)
-Text35.place(relx=0.1, rely=0.76, anchor=NW)
-Text35.insert(END, ">")
-
-Napis36 = Label(frame3, text="Turnaround", fg='white', bg='black')
-Napis36.place(relx=0.6, rely=0.2, anchor=SW)
-
-Text36 = Text(frame3, height=41, width=50)
-Text36.place(relx=0.6, rely=0.2, anchor=NW)
-Text36.insert(END, ">")
-
-Button2save = Button(frame3, text='Save',
-                     command=lambda: combine(Text31, Text32, Text33, Text34,
-                                             Text35, Text36))
-Button2save.place(relx=0.90, rely=0.95, anchor=CENTER, )
-
-Button3 = Button(frame3, text="Main page", command=lambda: raise_frame(frame1))
-Button3.place(relx=0.95, rely=0.95, anchor=CENTER)
+b3s = generuj_button_s_a(f3, "Save", t31, t32, t33,
+                         t34, t35, t36, 0.9, 0.95, CENTER)
+b3m = generuj_button_cf(f3, "Main page", f1, 0.95, 0.95, CENTER)
 
 
 ###
 ###
 ###
 
-Napis4 = Label(frame4, text="Contemplation",
+Napis4 = Label(f4, text="Contemplation",
                font=("arial", 30, "bold"), fg='white', bg='black')
 Napis4.place(relx=0.5, rely=0.1, anchor=CENTER)
 
@@ -188,16 +161,16 @@ Lista1 = ['Who am I?', 'What is death?', 'What is this?']
 def wylistuj():
     pos = 0.2
     for x in Lista1:
-        nap = Label(frame4, text=x)
+        nap = Label(f4, text=x)
         nap.place(relx=0.1, rely=pos, anchor=CENTER)
         pos += 0.03
 
 
 wylistuj()
 
-Button4 = Button(frame4, text="Main page", command=lambda: raise_frame(frame1))
+Button4 = Button(f4, text="Main page", command=lambda: raise_frame(f1))
 Button4.place(relx=0.95, rely=0.95, anchor=CENTER)
 
 
-raise_frame(frame1)
+raise_frame(f1)
 root.mainloop()
