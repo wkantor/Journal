@@ -49,13 +49,22 @@ def combine(a1, a2, a3, a4, a5, a6):
 # combine texts from the work into one
 
 
-def lista():
-    l = []
+def lista_c():
+    y = []
     with open('contemplation.txt', 'r') as file:
         for a in file:
             x = a.replace('\n', '')
-            l.append(x)
-    return l
+            y.append(x)
+    return y
+
+
+def lista_q():
+    y = []
+    with open('quotes.txt', 'r') as file:
+        for a in file:
+            x = a.replace('\n', '')
+            y.append(x)
+    return y
 
 
 def generuj_strone():
@@ -126,6 +135,7 @@ n1 = generuj_gnapis(f1, "Welcome to the Journal!")
 b11 = generuj_button_cf(f1, "Free writing", f2, 0.1, 0.2, CENTER)
 b12 = generuj_button_cf(f1, "The Work", f3, 0.1, 0.3, CENTER)
 b13 = generuj_button_cf(f1, "Contemplation", f4, 0.1, 0.4, CENTER)
+b14 = generuj_button_cf(f1, "Quotes", f5, 0.1, 0.5, CENTER)
 b1q = generuj_button_q(f1, "Exit", 0.95, 0.95, CENTER)
 # f1
 
@@ -176,21 +186,59 @@ b3m = generuj_button_cf(f3, "Main page", f1, 0.95, 0.95, CENTER)
 
 
 n4 = generuj_gnapis(f4, "Contemplation.")
+b4m = generuj_button_cf(f4, "Main page", f1, 0.95, 0.95, CENTER)
+Lista_c = lista_c()
 
-Lista = lista()
 
-
-def wylistuj():
+def wylistuj_c():
     pos = 0.2
-    for x in Lista:
-        nap = Label(f4, text=x)
-        nap.place(relx=0.1, rely=pos, anchor=CENTER)
-        pos += 0.03
+    a = 0
+    for y in Lista_c:
+        y = generuj_strone()
+        generuj_gnapis(y, Lista_c[a])
+        tx = generuj_text(y, 40, 100, 0.5, 0.5, CENTER,
+                          datetime.now().strftime('%H:%M:%S %d-%m-%Y')
+                          + "\n\n")
+        generuj_button_cf(
+            y, "Back", f4, 0.95, 0.95, CENTER)
+        generuj_button_s(y, "Save", tx, 0.9, 0.95, CENTER)
+        generuj_button_cf(f4, Lista_c[a], y, 0.1, pos, CENTER)
+        pos += 0.04
+        a += 1
 
 
-wylistuj()
-Button4 = Button(f4, text="Main page", command=lambda: raise_frame(f1))
-Button4.place(relx=0.95, rely=0.95, anchor=CENTER)
+wylistuj_c()
+# f4
+
+###
+###
+###
+
+
+n5 = generuj_gnapis(f5, "Quotes.")
+b4m = generuj_button_cf(f5, "Main page", f1, 0.95, 0.95, CENTER)
+Lista_q = lista_q()
+
+
+def wylistuj_q():
+    pos = 0.2
+    a = 0
+    for y in Lista_q:
+        y = generuj_strone()
+        generuj_gnapis(y, Lista_q[a])
+        tx = generuj_text(y, 40, 100, 0.5, 0.5, CENTER,
+                          datetime.now().strftime('%H:%M:%S %d-%m-%Y')
+                          + "\n\n")
+        generuj_button_cf(
+            y, "Back", f5, 0.95, 0.95, CENTER)
+        generuj_button_s(y, "Save", tx, 0.9, 0.95, CENTER)
+        generuj_button_cf(f5, Lista_q[a], y, 0.1, pos, CENTER)
+        pos += 0.04
+        a += 1
+
+
+wylistuj_q()
+# f5
 
 
 raise_frame(f1)
