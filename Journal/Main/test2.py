@@ -50,27 +50,27 @@ root.rowconfigure(0, weight=1)
 # zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
 
-class Strona:
-    def __init__(self):
-        self.frame = Frame(root, background='black',)
-
-    def frame(self):
-        return self.frame.grid(row=0, column=0, sticky='news')
-
-
-class Napis:
-    def napis(self, frame, txt):
-        self.napis = Label(frame, text=txt, font=(
-            "arial", 30, "bold"), fg='white', bg='black')
-        return self.napis.place(relx=0.1, rely=0.1, anchor=CENTER)
+class Cweczek:
+    def __init__(self, text, command, relx, rely, anchor):
+        self.t = text
+        self.c = command
+        self.x = relx
+        self.y = rely
+        self.a = anchor
 
 
-S1 = Strona()
-F1 = S1.frame
-F2 = S1.frame
+class Okno:
+    def __init__(self, frame, height, width, relx, rely, anchor, insert):
+        self.f = frame
+        self.h = height
+        self.w = width
+        self.x = relx
+        self.y = rely
+        self.a = anchor
+        self.i = insert
 
-N1 = Napis()
-Gn1 = N1.napis(F1, "Witej")
+
+HomeCweczek = Cweczek("home", raise_frame(f1), 0.9, 0.9, CENTER)
 
 
 raise_frame(F1)

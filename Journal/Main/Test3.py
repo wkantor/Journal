@@ -1,18 +1,13 @@
 '''
-Created on 4 Feb 2020
+Created on 5 Feb 2020
 
 @author: VojtechK
 '''
 
+
 from datetime import datetime
 from tkinter import *
 from tkinter.filedialog import *
-
-root = Tk()
-root.attributes("-fullscreen", True)   # fulscreen mode
-root.columnconfigure(0, weight=1)
-root.rowconfigure(0, weight=1)
-# zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
 
 def raise_frame(frame):
@@ -49,13 +44,11 @@ def combine(a1, a2, a3, a4, a5, a6):
 # combine texts from the work into one
 
 
-def lista():
-    l = []
-    with open('contemplation.txt', 'r') as file:
-        for a in file:
-            x = a.replace('\n', '')
-            l.append(x)
-    return l
+root = Tk()
+root.attributes("-fullscreen", True)   # fulscreen mode
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
+# zrobi colimny a rowy (kiere mi tworzom, grid - pracujom z framami) wileki
 
 
 def generuj_strone():
@@ -117,11 +110,6 @@ f4 = generuj_strone()
 f5 = generuj_strone()
 # Okna
 
-###
-###
-###
-
-
 n1 = generuj_gnapis(f1, "Welcome to the Journal!")
 b11 = generuj_button_cf(f1, "Free writing", f2, 0.1, 0.2, CENTER)
 b12 = generuj_button_cf(f1, "The Work", f3, 0.1, 0.3, CENTER)
@@ -129,22 +117,12 @@ b13 = generuj_button_cf(f1, "Contemplation", f4, 0.1, 0.4, CENTER)
 b1q = generuj_button_q(f1, "Exit", 0.95, 0.95, CENTER)
 # f1
 
-###
-###
-###
-
-
 n2 = generuj_gnapis(f2, "Free writing.")
 t2 = generuj_text(f2, 40, 100, 0.5, 0.5, CENTER,
                   datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n\n")
 b2 = generuj_button_cf(f2, "Main page", f1, 0.95, 0.95, CENTER)
 b2s = generuj_button_s(f2, "Save", t2, 0.9, 0.95, CENTER)
 # f2
-
-###
-###
-###
-
 
 n3 = generuj_gnapis(f3, "The Work.")
 
@@ -168,30 +146,37 @@ t36 = generuj_text(f3, 41, 50, 0.6, 0.2, NW, ">")
 b3s = generuj_button_s_a(f3, "Save", t31, t32, t33,
                          t34, t35, t36, 0.9, 0.95, CENTER)
 b3m = generuj_button_cf(f3, "Main page", f1, 0.95, 0.95, CENTER)
-# f3
+
+raise_frame(f1)
+root.mainloop()
+
+"""
 
 ###
 ###
 ###
 
+Napis4 = Label(frame4, text="Contemplation",
+               font=("arial", 30, "bold"), fg='white', bg='black')
+Napis4.place(relx=0.5, rely=0.1, anchor=CENTER)
 
-n4 = generuj_gnapis(f4, "Contemplation.")
-
-Lista = lista()
+Lista1 = ['Who am I?', 'What is death?', 'What is this?']
 
 
 def wylistuj():
     pos = 0.2
-    for x in Lista:
-        nap = Label(f4, text=x)
+    for x in Lista1:
+        nap = Label(frame4, text=x)
         nap.place(relx=0.1, rely=pos, anchor=CENTER)
         pos += 0.03
 
 
 wylistuj()
-Button4 = Button(f4, text="Main page", command=lambda: raise_frame(f1))
+
+Button4 = Button(frame4, text="Main page", command=lambda: raise_frame(frame1))
 Button4.place(relx=0.95, rely=0.95, anchor=CENTER)
 
 
-raise_frame(f1)
+raise_frame(frame1)
 root.mainloop()
+"""

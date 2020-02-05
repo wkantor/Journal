@@ -63,10 +63,9 @@ def generuj_gnapis(frame, text):
     return x
 
 
-def generuj_button(frame, text, command, relx, rely):
-    x = Button(frame, text=text,
-               command=lambda: command)
-    x.place(relx=relx, rely=rely, anchor=CENTER)
+def generuj_button(frame, text, command, relx, rely, anchor):
+    x = Button(frame, text=text, command=lambda: command)
+    x.place(relx=relx, rely=rely, anchor=anchor)
     return x
 
 
@@ -81,8 +80,9 @@ f1 = generuj_strone()
 f2 = generuj_strone()
 n1 = generuj_gnapis(f1, "welcome")
 n2 = generuj_gnapis(f2, "f2")
-b1 = generuj_button(f1, "f2", raise_frame(f2), 0.1, 0.1)
+b1 = generuj_button(f1, "f2", raise_frame(f2), 0.1, 0.1, CENTER)
 t1 = generuj_text(f1, 20, 20, 0.5, 0.5, CENTER, "<< :D >>")
+b2 = generuj_button(f2, "f1", raise_frame(f1), 0.1, 0.1, CENTER)
 
 
 raise_frame(f1)
