@@ -1,12 +1,17 @@
 '''
-Created on 4 Feb 2020
+Created on 5 Feb 2020
 
 @author: VojtechK
 '''
 
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from datetime import datetime
 from tkinter import *
 from tkinter.filedialog import *
+import codecs
+
 
 root = Tk()
 root.attributes("-fullscreen", True)   # fulscreen mode
@@ -37,16 +42,18 @@ def combine(a1, a2, a3, a4, a5, a6):
                                   filetypes=[("All Files", "*.*"),
                                              ("Text Documents", "*.txt")])
     if file_name:
-        f = open(file_name, 'w')
-        contents = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n" + "STATEMENT\n" + a1.get(1.0, 'end') + "\n\n" + \
-            "IS IT TRUE?\n" + a2.get(1.0, 'end') + "\n\n" + \
-            "IS IT REALLY TRUE?\n" + a3.get(1.0, 'end') + "\n\n" + \
-            "HOW DO YOU FEEL?\n" + a4.get(1.0, 'end') + "\n\n" + \
-            "WHO WOULD YOU BE?\n" + a5.get(1.0, 'end') + "\n\n" + \
-            "TURNAROUND\n" + a6.get(1.0, 'end')
-        f.write(contents)
-        f.close()
+        f = codecs.open(file_name, 'w', 'utf-8')
+        with codecs.open(file_name, 'w', 'utf-8') as f:
+            contents = datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n" + "STWIERDZENIE\n" + a1.get(1.0, 'end') + "\n\n" + \
+                "CZY TO JEST PRAWDA?\n" + a2.get(1.0, 'end') + "\n\n" + \
+                "CZY TO NAPEWNO PRAWDA?\n" + a3.get(1.0, 'end') + "\n\n" + \
+                "JAK SIĘ CZUJESZ, KIEDY W TO WIERZYSZ?\n" + a4.get(1.0, 'end') + "\n\n" + \
+                "KIM BYŚ BYŁ BEZ TEJ MYŚLI?\n" + a5.get(1.0, 'end') + "\n\n" + \
+                "ODWRÓCENIE\n" + a6.get(1.0, 'end')
+            f.write(contents)
+            f.close()
 # combine texts from the work into one
+# NIEFUNGUJE! http://simon-joseph.github.io/python-polish-letters/
 
 
 def lista_c():
@@ -131,12 +138,12 @@ f5 = generuj_strone()
 ###
 
 
-n1 = generuj_gnapis(f1, "Welcome to the Journal!")
-b11 = generuj_button_cf(f1, "Free writing", f2, 0.1, 0.2, CENTER)
-b12 = generuj_button_cf(f1, "The Work", f3, 0.1, 0.3, CENTER)
-b13 = generuj_button_cf(f1, "Contemplation", f4, 0.1, 0.4, CENTER)
-b14 = generuj_button_cf(f1, "Quotes", f5, 0.1, 0.5, CENTER)
-b1q = generuj_button_q(f1, "Exit", 0.95, 0.95, CENTER)
+n1 = generuj_gnapis(f1, "Witaj w Dzienniku!")
+b11 = generuj_button_cf(f1, "Wolne pisanie", f2, 0.1, 0.2, CENTER)
+b12 = generuj_button_cf(f1, "Praca", f3, 0.1, 0.3, CENTER)
+b13 = generuj_button_cf(f1, "Kontemplacja", f4, 0.1, 0.4, CENTER)
+b14 = generuj_button_cf(f1, "Cytaty", f5, 0.1, 0.5, CENTER)
+b1q = generuj_button_q(f1, "Wyjdź", 0.95, 0.95, CENTER)
 # f1
 
 ###
@@ -144,11 +151,11 @@ b1q = generuj_button_q(f1, "Exit", 0.95, 0.95, CENTER)
 ###
 
 
-n2 = generuj_gnapis(f2, "Free writing.")
+n2 = generuj_gnapis(f2, "Wolne pisanie")
 t2 = generuj_text(f2, 40, 100, 0.5, 0.5, CENTER,
                   datetime.now().strftime('%H:%M:%S %d-%m-%Y') + "\n\n")
-b2 = generuj_button_cf(f2, "Main page", f1, 0.95, 0.95, CENTER)
-b2s = generuj_button_s(f2, "Save", t2, 0.9, 0.95, CENTER)
+b2 = generuj_button_cf(f2, "Strona główna", f1, 0.95, 0.95, CENTER)
+b2s = generuj_button_s(f2, "Zapisz", t2, 0.9, 0.95, CENTER)
 # f2
 
 ###
@@ -156,17 +163,17 @@ b2s = generuj_button_s(f2, "Save", t2, 0.9, 0.95, CENTER)
 ###
 
 
-n3 = generuj_gnapis(f3, "The Work.")
+n3 = generuj_gnapis(f3, "Praca")
 
-n31 = generuj_napis(f3, "Statement.", 0.1, 0.2, SW)
-n32 = generuj_napis(f3, "Is it true?", 0.1, 0.35, SW)
+n31 = generuj_napis(f3, "Stwierdzenie.", 0.1, 0.2, SW)
+n32 = generuj_napis(f3, "Czy to jest prawda?", 0.1, 0.35, SW)
 n33 = generuj_napis(
-    f3, "Can you absolutely know that it is true?", 0.1, 0.43, SW)
-n34 = generuj_napis(f3, "How do you react, what happens, \
-when you believe that thought?", 0.1, 0.51, SW)
+    f3, "Czy możesz mieć absolutną pewność, że to prawda?", 0.1, 0.43, SW)
+n34 = generuj_napis(f3, "Jak reagujesz, co dzieje się, gdywierzysz,\
+ że ta myśl jest prawdziwa?", 0.1, 0.51, SW)
 n35 = generuj_napis(
-    f3, "Who would you be without that thought?", 0.1, 0.76, SW)
-n36 = generuj_napis(f3, "Turnaround.", 0.6, 0.2, SW)
+    f3, "Kim byłbyśbez tej myśli?", 0.1, 0.76, SW)
+n36 = generuj_napis(f3, "Odwrócenie.", 0.6, 0.2, SW)
 
 t31 = generuj_text(f3, 6, 70, 0.1, 0.2, NW, ">")
 t32 = generuj_text(f3, 1, 10, 0.1, 0.35, NW, ">")
@@ -175,9 +182,9 @@ t34 = generuj_text(f3, 10, 70, 0.1, 0.51, NW, ">")
 t35 = generuj_text(f3, 11, 70, 0.1, 0.76, NW, ">")
 t36 = generuj_text(f3, 41, 50, 0.6, 0.2, NW, ">")
 
-b3s = generuj_button_s_a(f3, "Save", t31, t32, t33,
+b3s = generuj_button_s_a(f3, "Zapisz", t31, t32, t33,
                          t34, t35, t36, 0.9, 0.95, CENTER)
-b3m = generuj_button_cf(f3, "Main page", f1, 0.95, 0.95, CENTER)
+b3m = generuj_button_cf(f3, "Strona główna", f1, 0.95, 0.95, CENTER)
 # f3
 
 ###
@@ -185,8 +192,8 @@ b3m = generuj_button_cf(f3, "Main page", f1, 0.95, 0.95, CENTER)
 ###
 
 
-n4 = generuj_gnapis(f4, "Contemplation.")
-b4m = generuj_button_cf(f4, "Main page", f1, 0.95, 0.95, CENTER)
+n4 = generuj_gnapis(f4, "Kontemplacja")
+b4m = generuj_button_cf(f4, "Strona główna", f1, 0.95, 0.95, CENTER)
 Lista_c = lista_c()
 
 
@@ -200,8 +207,8 @@ def wylistuj_c():
                           datetime.now().strftime('%H:%M:%S %d-%m-%Y')
                           + "\n\n")
         generuj_button_cf(
-            y, "Back", f4, 0.95, 0.95, CENTER)
-        generuj_button_s(y, "Save", tx, 0.9, 0.95, CENTER)
+            y, "Wróć", f4, 0.95, 0.95, CENTER)
+        generuj_button_s(y, "Zapisz", tx, 0.9, 0.95, CENTER)
         generuj_button_cf(f4, Lista_c[a], y, 0.1, pos, CENTER)
         pos += 0.04
         a += 1
@@ -215,8 +222,8 @@ wylistuj_c()
 ###
 
 
-n5 = generuj_gnapis(f5, "Quotes.")
-b4m = generuj_button_cf(f5, "Main page", f1, 0.95, 0.95, CENTER)
+n5 = generuj_gnapis(f5, "Cytaty")
+b4m = generuj_button_cf(f5, "Strona główna", f1, 0.95, 0.95, CENTER)
 Lista_q = lista_q()
 
 
@@ -230,8 +237,8 @@ def wylistuj_q():
                           datetime.now().strftime('%H:%M:%S %d-%m-%Y')
                           + "\n\n")
         generuj_button_cf(
-            y, "Back", f5, 0.95, 0.95, CENTER)
-        generuj_button_s(y, "Save", tx, 0.9, 0.95, CENTER)
+            y, "Wróć", f5, 0.95, 0.95, CENTER)
+        generuj_button_s(y, "Zapisz", tx, 0.9, 0.95, CENTER)
         generuj_button_cf(f5, Lista_q[a], y, 0.1, pos, CENTER)
         pos += 0.04
         a += 1
